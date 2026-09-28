@@ -1,0 +1,47 @@
+<?php
+require_once "config.php";
+
+$sql = "SELECT id, producto, tipo, presentacion FROM productos LIMIT 20";
+$res = $conn->query($sql);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="img/iconprincipal.jpg" rel="icon">
+  <title>Transportadora JOR - Cotización</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Cotización</h1>
+
+  <form action="guardar_cotizacion.php" method="POST">
+    <input type="text" name="cliente" placeholder="Tu nombre" required>
+
+    <select name="producto" required>
+      <option value="">Selecciona el producto...</option>
+
+      <?php if ($res && $res->num_rows > 0): ?>
+        <?php while ($row = $res->fetch_assoc()): ?>
+          <option value="<?php echo htmlspecialchars($row['producto']); ?>">
+            <?php echo htmlspecialchars($row['producto'] . " - " . $row['presentacion']); ?>
+          </option>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <option value="">No hay datos en la base</option>
+      <?php endif; ?>
+    </select>
+
+    <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
+    <input type="number" name="peso_kg" placeholder="Peso (kg)" min="0" required>
+
+    <input type="text" name="origen" placeholder="Origen" required>
+    <input type="text" name="destino" placeholder="Destino" required>
+
+    <textarea name="mensaje" placeholder="Mensaje (opcional)"></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+</body>
+</html>

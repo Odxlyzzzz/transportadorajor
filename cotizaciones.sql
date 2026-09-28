@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS cotizaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    correo VARCHAR(150) NOT NULL,
+    telefono VARCHAR(30) NOT NULL,
+    tipo_carga VARCHAR(100) NOT NULL,
+    nota TEXT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

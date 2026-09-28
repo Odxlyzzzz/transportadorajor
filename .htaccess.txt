@@ -1,0 +1,2 @@
+# Redirigir cualquier error 404 (página no encontrada) al inicio
+ErrorDocument 404 /index.html
